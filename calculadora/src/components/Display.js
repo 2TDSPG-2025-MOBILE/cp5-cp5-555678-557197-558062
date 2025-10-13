@@ -1,4 +1,3 @@
-import React from 'react';
 import { View, Text, StyleSheet, Dimensions } from 'react-native';
 
 const { width } = Dimensions.get('window');
@@ -14,17 +13,14 @@ const Display = ({
 
   return (
     <View style={styles.displayContainer}>
-      {/* Linha de operação anterior */}
       <Text style={styles.previousOperation}>
         {previousNumber} {operation}
       </Text>
-      
-      {/* Linha do número atual */}
+
       <Text style={styles.currentNumber} numberOfLines={1} adjustsFontSizeToFit>
         {currentNumber}
       </Text>
       
-      {/* Linha do resultado (se houver) */}
       {result ? (
         <Text style={styles.resultText}>
           = {result}

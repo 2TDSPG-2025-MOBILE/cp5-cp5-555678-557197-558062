@@ -1,4 +1,3 @@
-import React from 'react';
 import { 
   TouchableOpacity, 
   Text, 
@@ -19,13 +18,19 @@ const Button = ({
 }) => {
   const styles = createStyles(isDarkTheme, isSpecial, isOperation, isScientific);
 
+  // Ícone para o botão de histórico
+  const getButtonTitle = () => {
+    if (title === 'HISTORY') return '📋'; // Ícone para histórico
+    return title;
+  };
+
   return (
     <TouchableOpacity
       style={styles.button}
       onPress={() => onPress(title)}
       activeOpacity={0.7}
     >
-      <Text style={styles.buttonText}>{title}</Text>
+      <Text style={styles.buttonText}>{getButtonTitle()}</Text>
     </TouchableOpacity>
   );
 };

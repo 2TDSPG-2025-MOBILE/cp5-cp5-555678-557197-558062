@@ -1,9 +1,7 @@
-// Função principal para calcular resultados
 export const calculateResult = (num1, num2, operation) => {
   const firstNum = parseFloat(num1);
   const secondNum = parseFloat(num2);
 
-  // Validação de entrada
   if (isNaN(firstNum) || isNaN(secondNum)) {
     return { error: true, value: 'Erro: Entrada inválida' };
   }
@@ -22,7 +20,6 @@ export const calculateResult = (num1, num2, operation) => {
         result = firstNum * secondNum;
         break;
       case '÷':
-        // Tratamento de divisão por zero
         if (secondNum === 0) {
           return { error: true, value: 'Erro: Divisão por zero' };
         }
@@ -32,7 +29,6 @@ export const calculateResult = (num1, num2, operation) => {
         return { error: true, value: 'Erro: Operação inválida' };
     }
 
-    // Formatar resultado para evitar números com muitas casas decimais
     if (Number.isInteger(result)) {
       return { error: false, value: result };
     } else {
@@ -44,7 +40,6 @@ export const calculateResult = (num1, num2, operation) => {
   }
 };
 
-// Função para validar operações
 export const validateOperation = (currentNumber, operation) => {
   if (!currentNumber || currentNumber === '0') {
     return false;
@@ -54,11 +49,9 @@ export const validateOperation = (currentNumber, operation) => {
   return validOperations.includes(operation);
 };
 
-// Função para formatar números para exibição
 export const formatNumber = (number) => {
   if (typeof number !== 'number') return number;
   
-  // Evitar notação científica para números muito grandes/pequenos
   if (number > 1e15 || (number < 1e-6 && number > 0)) {
     return number.toExponential(6);
   }

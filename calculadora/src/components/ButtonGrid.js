@@ -1,4 +1,3 @@
-import React from 'react';
 import { View, StyleSheet } from 'react-native';
 import Button from './Button';
 
@@ -51,10 +50,10 @@ const ButtonGrid = ({ onButtonPress, isDarkTheme }) => {
     ],
     // Linha 7: Zero e decimal
     [
-      { title: 'THEME', isScientific: true },
+      { title: 'HISTORY', isScientific: true }, // Substituído THEME por HISTORY
       { title: '0' },
       { title: '.' },
-      { title: 'CLEAR', isSpecial: true, hidden: true } // Espaço reservado
+      { title: '', hidden: true } // Espaço reservado para manter layout
     ]
   ];
 
@@ -63,15 +62,17 @@ const ButtonGrid = ({ onButtonPress, isDarkTheme }) => {
       {buttonRows.map((row, rowIndex) => (
         <View key={rowIndex} style={styles.buttonRow}>
           {row.map((button, buttonIndex) => (
-            <Button
-              key={buttonIndex}
-              title={button.title}
-              onPress={onButtonPress}
-              isDarkTheme={isDarkTheme}
-              isSpecial={button.isSpecial}
-              isOperation={button.isOperation}
-              isScientific={button.isScientific}
-            />
+            !button.hidden && (
+              <Button
+                key={buttonIndex}
+                title={button.title}
+                onPress={onButtonPress}
+                isDarkTheme={isDarkTheme}
+                isSpecial={button.isSpecial}
+                isOperation={button.isOperation}
+                isScientific={button.isScientific}
+              />
+            )
           ))}
         </View>
       ))}

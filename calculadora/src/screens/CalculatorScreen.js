@@ -1,13 +1,14 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { 
   View, 
-  StyleSheet, 
-  Dimensions,
-  SafeAreaView 
+  StyleSheet,
+  SafeAreaView,
+  TouchableOpacity,
+  Text
 } from 'react-native';
 import Display from '../components/Display';
 import ButtonGrid from '../components/ButtonGrid';
-import HistoryList from '../components/HistoryList';
+import HistoryModal from '../components/HistoryModal';
 import { 
   calculateResult, 
   validateOperation 
@@ -21,6 +22,7 @@ const CalculatorScreen = () => {
   const [result, setResult] = useState('');
   const [history, setHistory] = useState([]);
   const [isDarkTheme, setIsDarkTheme] = useState(false);
+  const [showHistory, setShowHistory] = useState(false);
 
   // Função para lidar com pressionamento de botões
   const handleButtonPress = (buttonValue) => {
@@ -158,9 +160,15 @@ const CalculatorScreen = () => {
         setIsDarkTheme(!isDarkTheme);
         break;
 
-      case 'CLEAR':
+      case 'HISTORY':
+        // Abrir modal de histórico
+        setShowHistory(true);
+        break;
+
+      case 'CLEAR_HISTORY':
         // Limpar histórico
         setHistory([]);
+        setShowHistory(false);
         break;
 
       default:
@@ -174,12 +182,34 @@ const CalculatorScreen = () => {
     }
   };
 
+  // Função para limpar histórico
+  const handleClearHistory = () => {
+    setHistory([]);
+    setShowHistory(false);
+  };
+
   // Estilos baseados no tema
   const styles = createStyles(isDarkTheme);
 
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.calculator}>
+        {/* Header com menu hamburguer */}
+        <View style={styles.header}>
+          <Text style={styles.headerTitle}>Calculadora Científica</Text>
+          <TouchableOpacity 
+            style={styles.menuButton}
+            onPress={() => setShowHistory(true)}
+          >
+            <Text style={styles.menuButtonText}>☰</Text>
+            {history.length > 0 && (
+              <View style={styles.historyBadge}>
+                <Text style={styles.badgeText}>{history.length}</Text>
+              </View>
+            )}
+          </TouchableOpacity>
+        </View>
+        
         {/* Display principal */}
         <Display 
           currentNumber={currentNumber}
@@ -189,16 +219,19 @@ const CalculatorScreen = () => {
           isDarkTheme={isDarkTheme}
         />
         
-        {/* Histórico de cálculos */}
-        <HistoryList 
-          history={history}
-          isDarkTheme={isDarkTheme}
-        />
-        
         {/* Grade de botões */}
         <ButtonGrid 
           onButtonPress={handleButtonPress}
           isDarkTheme={isDarkTheme}
+        />
+        
+        {/* Modal de histórico */}
+        <HistoryModal 
+          visible={showHistory}
+          history={history}
+          isDarkTheme={isDarkTheme}
+          onClose={() => setShowHistory(false)}
+          onClearHistory={handleClearHistory}
         />
       </View>
     </SafeAreaView>
@@ -215,6 +248,46 @@ const createStyles = (isDark) => StyleSheet.create({
     flex: 1,
     justifyContent: 'flex-end',
     padding: 16,
+  },
+  header: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    paddingHorizontal: 10,
+    paddingBottom: 20,
+    paddingTop: 10,
+  },
+  headerTitle: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    color: isDark ? '#ffffff' : '#000000',
+  },
+  menuButton: {
+    padding: 10,
+    borderRadius: 8,
+    backgroundColor: isDark ? '#3d3d3d' : '#e0e0e0',
+    position: 'relative',
+  },
+  menuButtonText: {
+    fontSize: 20,
+    color: isDark ? '#ffffff' : '#000000',
+    fontWeight: 'bold',
+  },
+  historyBadge: {
+    position: 'absolute',
+    top: -5,
+    right: -5,
+    backgroundColor: '#e74c3c',
+    borderRadius: 10,
+    width: 20,
+    height: 20,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  badgeText: {
+    color: '#ffffff',
+    fontSize: 12,
+    fontWeight: 'bold',
   },
 });
 
