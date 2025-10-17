@@ -13,14 +13,24 @@ const Display = ({
 
   return (
     <View style={styles.displayContainer}>
-      <Text style={styles.previousOperation}>
-        {previousNumber} {operation}
-      </Text>
+      {/* Número e operação anterior */}
+      {previousNumber !== '' && operation !== '' && (
+        <Text style={styles.previousOperation}>
+          {previousNumber} {operation}
+        </Text>
+      )}
 
-      <Text style={styles.currentNumber} numberOfLines={1} adjustsFontSizeToFit>
+      {/* Número atual */}
+      <Text
+        style={styles.currentNumber}
+        numberOfLines={1}
+        adjustsFontSizeToFit={true}
+        minimumFontScale={0.5}
+      >
         {currentNumber}
       </Text>
       
+      {/* Resultado */}
       {result ? (
         <Text style={styles.resultText}>
           = {result}
@@ -33,17 +43,17 @@ const Display = ({
 const createStyles = (isDark) => StyleSheet.create({
   displayContainer: {
     backgroundColor: isDark ? '#2d2d2d' : '#ffffff',
-    padding: 20,
+    paddingHorizontal: 20,
+    paddingVertical: 10,
     borderRadius: 15,
     marginBottom: 20,
     minHeight: 120,
+    maxHeight: 150,
     justifyContent: 'flex-end',
     alignItems: 'flex-end',
+    flexShrink: 1,
     shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
+    shadowOffset: { width: 0, height: 2 },
     shadowOpacity: isDark ? 0.3 : 0.1,
     shadowRadius: 3.84,
     elevation: 5,

@@ -193,23 +193,7 @@ const CalculatorScreen = () => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <View style={styles.calculator}>
-        {/* Header com menu hamburguer */}
-        <View style={styles.header}>
-          <Text style={styles.headerTitle}>Calculadora Científica</Text>
-          <TouchableOpacity 
-            style={styles.menuButton}
-            onPress={() => setShowHistory(true)}
-          >
-            <Text style={styles.menuButtonText}>☰</Text>
-            {history.length > 0 && (
-              <View style={styles.historyBadge}>
-                <Text style={styles.badgeText}>{history.length}</Text>
-              </View>
-            )}
-          </TouchableOpacity>
-        </View>
-        
+      <View style={styles.calculator}>       
         {/* Display principal */}
         <Display 
           currentNumber={currentNumber}
