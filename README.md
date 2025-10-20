@@ -1,4 +1,4 @@
-# React Native Calculator
+# 🧮✨ React Native Calculator
 
 ## Descrição
 
@@ -7,7 +7,7 @@ Possui histórico das últimas 5 operações, alternância entre tema claro e es
 
 O projeto é modularizado, com componentes `Display`, `Button`, `ButtonGrid` e `HistoryModal` para facilitar manutenção e expansão.
 
-## Funcionalidades
+## ⚙️ Funcionalidades
 
 * Alternância de tema claro e escuro com o botão `THEME`.
 * Histórico de operações com o botão `HISTORY`.
@@ -16,7 +16,7 @@ O projeto é modularizado, com componentes `Display`, `Button`, `ButtonGrid` e `
 * Layout responsivo: display não quebra mesmo com números grandes.
 * Botões dinâmicos: cores mudam conforme tipo (especial, operação ou científica).
 
-## Estrutura de pastas
+## 📁 Estrutura de pastas
 
 ```
 src/
@@ -34,7 +34,7 @@ src/
 └─ README.md
 ```
 
-## Pré-requisitos
+## 🧩 Pré-requisitos
 
 Antes de rodar o projeto, é necessário ter:
 
@@ -43,7 +43,7 @@ Antes de rodar o projeto, é necessário ter:
 * [React Native CLI](https://reactnative.dev/docs/environment-setup)
 * Android Studio ou Xcode para emuladores ou dispositivos reais
 
-## Instalação
+## 🚀 Instalação
 
 1. Clone o repositório:
 
@@ -60,19 +60,19 @@ npm install
 yarn install
 ```
 
-## Execução
+## ▶️ Execução
 
 ```bash
 npx expo start
 ```
 
-## Tema
+## 🎨 Tema
 
 * Claro: background branco, botões cinza, azul (operações), verde (científicos), laranja (especiais), texto preto ou branco nos botões destacados.
 * Escuro: background cinza escuro, botões cinza escuro, azul escuro, verde escuro, laranja escuro, texto branco ou branco nos botões destacados.
 * Alternância com o botão `THEME`.
 
-## Componentes
+## 🧑‍💻 Componentes
 
 * **Button.js**: botão individual com cores dinâmicas conforme tipo, com ajuste de opacidade ao clicar.
 * **ButtonGrid.js**: organiza os botões em linhas e recebe a função `onButtonPress`.
